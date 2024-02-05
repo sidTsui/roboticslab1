@@ -7,18 +7,20 @@ from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 from robotics_lab_1.msg import Turtlecontrol
 
-pos_msg = Pose()
+#initializing pose and turtlecontrol
+pos_msg = Pose() 
 control_msg = Turtlecontrol();
 
 
 
 def pos_callback(data):#position info
 	global pos_msg
-	#convert linear position to degrees
-	pos_msg.x = data.x
+	#convert linear position to degrees and store in pose obj
+	pos_msg.x = data.x 
 	
-def control_gain(data):
-	global control_msg
+def control_gain(data):#control gain info
+	global control_msg 
+	#get control gain values and store them in turtlecontrol
 	control_msg.kp = data.kp
 	control_msg.xd = data.xd
 	
@@ -30,7 +32,9 @@ if __name__ == '__main__':
 	rospy.init_node('ControlNode', anonymous = True)
 	# set a 10Hz frequency for this loop
 	rospy.Subscriber('/turtle1/pose',Pose, pose_callback)
+	#subcriber to turtle1/pose topic, taking in pose
 	rospy.Subscriber('/turtle1/control_params', Turtlecontrol, control_gain)
+	#subcriber to turtle1/control_params topic, taking in turtlecontrol
 	loop_rate = rospy.Rate(10)
 	# declare a variable of type Twist for sending control commands
 	vel_cmd = Twist()
