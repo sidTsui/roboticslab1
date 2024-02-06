@@ -1,2 +1,2 @@
 float32 kp
-float31 xd
+float32 xd
