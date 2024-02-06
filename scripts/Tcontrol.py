@@ -6,24 +6,19 @@ import rospy
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 from robotics_lab_1.msg import Turtlecontrol
-
 #initializing pose and turtlecontrol
 pose_msg = Pose() 
-control_msg = Turtlecontrol();
-
-
+control_msg = Turtlecontrol()
 
 def pos_callback(data):#position info, used pos_publisher.py from example code
 	global pos_msg
 	#convert linear position to degrees and store in pose obj
 	pos_msg.xd = data.xd 
-	
 def control_gain(data):#control gain info., used pos_callback from example code as an outline
 	global control_msg 
 	#get control gain values and store them in turtlecontrol
 	control_msg.kp = data.kp
 	
-
 if __name__ == '__main__':
 	# declare a publisher to publish in the velocity command topic
 	cmd_pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size = 10)
